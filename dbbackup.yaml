@@ -1,5 +1,5 @@
 ---
-- hosts: Server-VPS
+- hosts: all
   gather_facts: true
   vars_files:
     - database_vault.yaml
