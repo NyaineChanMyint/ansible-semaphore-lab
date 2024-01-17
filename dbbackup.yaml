@@ -1,16 +1,20 @@
 ---
 - hosts: all
   gather_facts: true
+  vars_files:
+    - database_vault.yaml
   tasks:
     - name: Create variables
       set_fact:
-        db_file_name: "15dalo_{{ ansible_date_time.date | replace('-','') }}.sql"
+        db_file_name: "{{ db_name }}_{{ ansible_date_time.date | replace('-','') }}.sql"
+    
     - name: Confirm hostname
       debug:
         msg: Logged into the server.
-    - name: Dump database
+
+    - name: Download Database to server
       shell: |
-        mysqldump -u root -pPr0fess10n@L 15dalo > /home/sysadmin/"{{ db_file_name }}"
+        mysqldump -u {{ db_user_name}} -p"{{ db_user_password }}" {{ db_name }} --quick --lock-tables=false > "{{ db_file_name }}" --no-tablespaces
       no_log: true
     - name: Wait until the database backup completed on server
       wait_for:
