@@ -1,0 +1,17 @@
+---
+- hosts: Server-VPS
+  gather_facts: true
+  vars_files:
+    - database_vault.yaml
+  tasks:
+    - name: Create variables
+      set_fact:
+        db_file_name: "{{ db_name }}_{{ ansible_date_time.date | replace('-','') }}.sql"
+    - name: Confirm hostname
+      debug:
+        msg: Logged into the server.
+    - name: Dump database
+      mysql_db:
+        state: dump
+        name: radius
+        target: /home/sysadmin/dalo-bk/db/"{{ db_file_name }}"
