@@ -14,4 +14,4 @@
       mysql_db:
         state: dump
         name: radius
-        target: /home/sysadmin/dalo-bk/db/"{{ db_file_name }}"
+        target: /home/sysadmin/"{{ db_file_name }}"
