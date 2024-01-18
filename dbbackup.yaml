@@ -14,8 +14,7 @@
         msg: Logged into the server.
 
     - name: Backup Database named 15dalo
-      shell: "mysqldump -u root -pPr0fess10n@L 15dalo --quick --lock-tables=false > /home/sysadmin/15dalo.sql --no-tablespaces"
-      no_log: true
+      shell: mysqldump -u root -pPr0fess10n@L 15dalo --quick --lock-tables=false > /home/sysadmin/15dalo.sql --no-tablespaces
       
     - name: Wait until the database backup completed on server
       wait_for:
