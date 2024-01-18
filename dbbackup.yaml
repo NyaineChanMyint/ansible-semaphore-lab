@@ -6,7 +6,7 @@
   tasks:
     - name: "Install ansible python3 mysql dependency"
       package:
-        name: python3-PyMySQL
+        name: python3-mysqldb
         state: present
     - name: Create variables
       set_fact:
