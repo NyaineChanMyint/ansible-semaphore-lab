@@ -3,6 +3,7 @@
   gather_facts: true
   vars_files:
     - database_vault.yaml
+    
   tasks:
     - name: Create variables
       set_fact:
@@ -13,9 +14,9 @@
         msg: Logged into the server.
 
     - name: Backup Database named 15dalo
-      shell: |
-        mysqldump -u root -pPr0fess10n@L 15dalo --quick --lock-tables=false > /home/sysadmin/15dalo.sql --no-tablespaces
+      shell: "mysqldump -u root -pPr0fess10n@L 15dalo --quick --lock-tables=false > /home/sysadmin/15dalo.sql --no-tablespaces"
       no_log: true
+      
     - name: Wait until the database backup completed on server
       wait_for:
         path: "{{ db_file_name }}"
