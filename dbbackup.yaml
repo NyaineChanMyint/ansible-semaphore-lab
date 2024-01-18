@@ -3,19 +3,18 @@
   gather_facts: true
   vars_files:
     - database_vault.yaml
-    
   tasks:
     - name: Create variables
       set_fact:
         db_file_name: "15dalo.sql"
-    
     - name: Confirm hostname
       debug:
         msg: Logged into the server.
-
     - name: Backup Database named 15dalo
-      shell: sudo mysqldump -u root -pPr0fess10n@L 15dalo --quick --lock-tables=false > /home/sysadmin/15dalo.sql --no-tablespaces
-      
+      community.mysql.mysql_db:
+        state: dump
+        name: 15dalo
+        target: /home/sysadmin/15dalo.sql    
     - name: Wait until the database backup completed on server
       wait_for:
         path: "{{ db_file_name }}"
