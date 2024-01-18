@@ -6,8 +6,8 @@
   tasks:
     - name: "Install ansible python3 mysql dependency"
       package:
-        name: python3-mysqldb
-        state: latest
+        name: python3-PyMySQL
+        state: present
     - name: Create variables
       set_fact:
         db_file_name: "15dalo.sql"
